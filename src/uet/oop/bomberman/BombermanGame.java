@@ -12,6 +12,9 @@ import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.Grass;
 import uet.oop.bomberman.entities.Wall;
 import uet.oop.bomberman.graphics.Sprite;
+import javafx.event.EventHandler;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,8 +62,42 @@ public class BombermanGame extends Application {
 
         createMap();
 
-        Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
+        Bomber bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
         entities.add(bomberman);
+
+        scene.setOnKeyPressed(event -> {
+            switch (event.getCode()) {
+                case UP:
+                {
+                    bomberman.directionY = -1;
+                    bomberman.directionX = 0;
+                    break;
+                }
+                case DOWN:
+                {
+                    bomberman.directionY = 1;
+                    bomberman.directionX = 0;
+                    break;
+                }
+                case LEFT:
+                {
+                    bomberman.directionY = 0;
+                    bomberman.directionX = -1;
+                    break;
+                }
+                case RIGHT:
+                {
+                    bomberman.directionY = 0;
+                    bomberman.directionX = 1;
+                    break;
+                }
+                case SPACE:
+                {
+
+                }
+            }
+        });
+
     }
 
     public void createMap() {
