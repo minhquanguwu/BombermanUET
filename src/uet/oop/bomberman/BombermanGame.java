@@ -25,7 +25,7 @@ public class BombermanGame extends Application {
     private GraphicsContext gc;
     private Canvas canvas;
     private List<Entity> entities = new ArrayList<>();
-    private List<Entity> stillObjects = new ArrayList<>();
+    public static List<Entity> stillObjects = new ArrayList<>();
 
 
     public static void main(String[] args) {
@@ -49,6 +49,9 @@ public class BombermanGame extends Application {
         stage.setScene(scene);
         stage.show();
 
+        Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
+        entities.add(bomberman);
+
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
@@ -59,9 +62,6 @@ public class BombermanGame extends Application {
         timer.start();
 
         createMapFromFile();
-
-        Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
-        entities.add(bomberman);
 
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
@@ -87,7 +87,8 @@ public class BombermanGame extends Application {
                 }
                 case SPACE:
                 {
-
+                    ((Bomber) bomberman).STATUS = 4;
+                    break;
                 }
                 default:
                     break;

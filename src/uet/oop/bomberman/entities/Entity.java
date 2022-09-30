@@ -27,6 +27,23 @@ public abstract class Entity {
 
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getXUnit() {
+        return x / Sprite.SCALED_SIZE;
+    }
+
+    public int getYUnit() {
+        return y / Sprite.SCALED_SIZE;
+    }
+    public abstract boolean collide(Entity e);
+
     public void render(GraphicsContext gc) {
         gc.drawImage(img, x, y);
     }
