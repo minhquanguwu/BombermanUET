@@ -5,6 +5,9 @@ import javafx.scene.image.Image;
 import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.entities.AnimatedEntity;
 import uet.oop.bomberman.entities.Entity;
+import uet.oop.bomberman.entities.movingEntities.Bomber;
+import uet.oop.bomberman.entities.movingEntities.Enemies;
+import uet.oop.bomberman.entities.staticEntities.Brick;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.awt.*;
@@ -18,7 +21,7 @@ public class Bomb extends AnimatedEntity {
     private List<Entity> FlameLeft = new ArrayList<>();
     private List<Entity> FlameRight = new ArrayList<>();
     protected int timeToExplode = 200;
-    protected int flameSize = 1;
+    public static int flameSize = 1;
 
     public Bomb(int x, int y, Image img) {
         super(x, y, img);
@@ -26,7 +29,8 @@ public class Bomb extends AnimatedEntity {
 
     @Override
     public boolean collide(Entity e) {
-        return true;
+        if (e instanceof Bomber) return true;
+        return false;
     }
 
     @Override
@@ -41,12 +45,9 @@ public class Bomb extends AnimatedEntity {
         } else if(timeToExplode < 0) {
             Image temp = Sprite.movingSprite(Sprite.bomb_exploded,Sprite.bomb_exploded1, Sprite.bomb_exploded2, animate, 50).getFxImage();
             setImg(temp);
-            FlameUp.forEach(Entity::update);
-            FlameDown.forEach(Entity::update);
-            FlameLeft.forEach(Entity::update);
-            FlameRight.forEach(Entity::update);
+            UpdateFlame();
         }
-        if (timeToExplode < -120) {
+        if (timeToExplode < -50) {
             FlameUp.clear();
             FlameDown.clear();
             FlameLeft.clear();
@@ -58,19 +59,13 @@ public class Bomb extends AnimatedEntity {
     @Override
     public void render(GraphicsContext gc) {
         super.render(gc);
-        FlameUp.forEach(g -> g.render(gc));
-        FlameDown.forEach(g -> g.render(gc));
-        FlameLeft.forEach(g -> g.render(gc));
-        FlameRight.forEach(g -> g.render(gc));
+        RenderFlame(gc);
     }
 
     protected void explode() {
         Image temp = Sprite.movingSprite(Sprite.bomb_exploded,Sprite.bomb_exploded1, Sprite.bomb_exploded2, animate, 50).getFxImage();
         setImg(temp);
-        setFlameUp();
-        setFlameDown();
-        setFlameLeft();
-        setFlameRight();
+        setFlame();
     }
 
     protected void setFlameUp() {
@@ -121,6 +116,9 @@ public class Bomb extends AnimatedEntity {
                     List<Entity> CheckList = BombermanGame.FindList(this.getXUnit(), this.getYUnit() - tempSize, BombermanGame.stillObjects);
                     for (Entity check : CheckList) {
                         if (!check.collide(check)) {
+                            if (check instanceof Brick) {
+                                ((Brick) check).isDestroy();
+                            }
                             return tempSize - 1;
                         }
                     }
@@ -135,6 +133,9 @@ public class Bomb extends AnimatedEntity {
                     List<Entity> CheckList = BombermanGame.FindList(this.getXUnit(), this.getYUnit() + tempSize, BombermanGame.stillObjects);
                     for (Entity check : CheckList) {
                         if (!check.collide(check)) {
+                            if (check instanceof Brick) {
+                                ((Brick) check).isDestroy();
+                            }
                             return tempSize - 1;
                         }
                     }
@@ -149,6 +150,9 @@ public class Bomb extends AnimatedEntity {
                     List<Entity> CheckList = BombermanGame.FindList(this.getXUnit() - tempSize, this.getYUnit(), BombermanGame.stillObjects);
                     for (Entity check : CheckList) {
                         if (!check.collide(check)) {
+                            if (check instanceof Brick) {
+                                ((Brick) check).isDestroy();
+                            }
                             return tempSize - 1;
                         }
                     }
@@ -163,6 +167,9 @@ public class Bomb extends AnimatedEntity {
                     List<Entity> CheckList = BombermanGame.FindList(this.getXUnit() + tempSize, this.getYUnit(), BombermanGame.stillObjects);
                     for (Entity check : CheckList) {
                         if (!check.collide(check)) {
+                            if (check instanceof Brick) {
+                                ((Brick) check).isDestroy();
+                            }
                             return tempSize - 1;
                         }
                     }
@@ -173,5 +180,24 @@ public class Bomb extends AnimatedEntity {
             }
         }
         return flameSize;
+    }
+
+    private void UpdateFlame() {
+        FlameUp.forEach(Entity::update);
+        FlameDown.forEach(Entity::update);
+        FlameLeft.forEach(Entity::update);
+        FlameRight.forEach(Entity::update);
+    }
+    private void RenderFlame(GraphicsContext gc) {
+        FlameUp.forEach(g -> g.render(gc));
+        FlameDown.forEach(g -> g.render(gc));
+        FlameLeft.forEach(g -> g.render(gc));
+        FlameRight.forEach(g -> g.render(gc));
+    }
+    private void setFlame() {
+        setFlameUp();
+        setFlameDown();
+        setFlameLeft();
+        setFlameRight();
     }
 }

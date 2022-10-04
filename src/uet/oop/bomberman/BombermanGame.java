@@ -8,6 +8,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 import uet.oop.bomberman.entities.*;
+import uet.oop.bomberman.entities.items.FlameItem;
 import uet.oop.bomberman.entities.movingEntities.Balloon;
 import uet.oop.bomberman.entities.movingEntities.Bomber;
 import uet.oop.bomberman.entities.staticEntities.Brick;
@@ -142,13 +143,20 @@ public class BombermanGame extends Application {
                         Entity object1  = new Grass(i, j, Sprite.grass.getFxImage());
                         stillObjects.add(object1);
                         Entity object  = new Balloon(i, j, Sprite.balloom_right1.getFxImage());
-                        stillObjects.add(object);
+                        enemies.add(object);
                         break;
                     }
                     case '*': {
                         Entity object1  = new Grass(i, j, Sprite.grass.getFxImage());
                         stillObjects.add(object1);
                         Entity object  = new Brick(i, j, Sprite.brick.getFxImage());
+                        stillObjects.add(object);
+                        break;
+                    }
+                    case 'f': {
+                        Entity object1  = new Grass(i, j, Sprite.grass.getFxImage());
+                        stillObjects.add(object1);
+                        Entity object  = new FlameItem(i, j, Sprite.powerup_flames.getFxImage());
                         stillObjects.add(object);
                         break;
                     }
@@ -164,9 +172,18 @@ public class BombermanGame extends Application {
 
     public void update() {
         entities.forEach(Entity::update);
+        for (int i = 0; i < enemies.size(); i++) {
+            if (enemies.get(i).removed) {
+                enemies.remove(i);
+                continue;
+            }
+            enemies.get(i).update();
+        }
+
         for (int i = 0; i < stillObjects.size(); i++) {
             if (stillObjects.get(i).removed) {
                 stillObjects.remove(i);
+                continue;
             }
             stillObjects.get(i).update();
         }
@@ -175,6 +192,7 @@ public class BombermanGame extends Application {
     public void render() {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         stillObjects.forEach(g -> g.render(gc));
+        enemies.forEach(g -> g.render(gc));
         entities.forEach(g -> g.render(gc));
     }
 

@@ -1,9 +1,13 @@
 package uet.oop.bomberman.entities.bomb;
 
 import javafx.scene.image.Image;
+import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.entities.AnimatedEntity;
 import uet.oop.bomberman.entities.Entity;
+import uet.oop.bomberman.entities.movingEntities.Enemies;
 import uet.oop.bomberman.graphics.Sprite;
+
+import java.util.List;
 
 public class FlameSegment extends AnimatedEntity {
 
@@ -26,6 +30,14 @@ public class FlameSegment extends AnimatedEntity {
                 } else {
                     temp = Sprite.movingSprite(Sprite.explosion_vertical, Sprite.explosion_vertical1, Sprite.explosion_vertical2, animate, 50).getFxImage();
                 }
+                List<Entity> CheckList = BombermanGame.FindList(this.getXUnit(), this.getYUnit(), BombermanGame.enemies);
+                for (Entity check : CheckList) {
+                    if(!check.collide(check)) {
+                        if (check instanceof Enemies) {
+                            ((Enemies) check).isDestroy();
+                        }
+                    }
+                }
                 break;
             }
             case 1: {
@@ -33,6 +45,14 @@ public class FlameSegment extends AnimatedEntity {
                     temp = Sprite.movingSprite(Sprite.explosion_vertical_down_last, Sprite.explosion_vertical_down_last1, Sprite.explosion_vertical_down_last2, animate, 50).getFxImage();
                 } else {
                     temp = Sprite.movingSprite(Sprite.explosion_vertical, Sprite.explosion_vertical1, Sprite.explosion_vertical2, animate, 50).getFxImage();
+                }
+                List<Entity> CheckList = BombermanGame.FindList(this.getXUnit(), this.getYUnit(), BombermanGame.enemies);
+                for (Entity check : CheckList) {
+                    if(!check.collide(check)) {
+                        if (check instanceof Enemies) {
+                            ((Enemies) check).isDestroy();
+                        }
+                    }
                 }
                 break;
             }
@@ -42,6 +62,14 @@ public class FlameSegment extends AnimatedEntity {
                 } else {
                     temp = Sprite.movingSprite(Sprite.explosion_horizontal, Sprite.explosion_horizontal1, Sprite.explosion_horizontal2, animate, 50).getFxImage();
                 }
+                List<Entity> CheckList = BombermanGame.FindList(this.getXUnit(), this.getYUnit(), BombermanGame.enemies);
+                for (Entity check : CheckList) {
+                    if(!check.collide(check)) {
+                        if (check instanceof Enemies) {
+                            ((Enemies) check).isDestroy();
+                        }
+                    }
+                }
                 break;
             }
             case 3: {
@@ -49,6 +77,14 @@ public class FlameSegment extends AnimatedEntity {
                     temp = Sprite.movingSprite(Sprite.explosion_horizontal_right_last, Sprite.explosion_horizontal_right_last1, Sprite.explosion_horizontal_right_last2, animate,50).getFxImage();
                 } else {
                     temp = Sprite.movingSprite(Sprite.explosion_horizontal, Sprite.explosion_horizontal1, Sprite.explosion_horizontal2, animate, 50).getFxImage();
+                }
+                List<Entity> CheckList = BombermanGame.FindList(this.getXUnit(), this.getYUnit(), BombermanGame.enemies);
+                for (Entity check : CheckList) {
+                    if(!check.collide(check)) {
+                        if (check instanceof Enemies) {
+                            ((Enemies) check).isDestroy();
+                        }
+                    }
                 }
                 break;
             }

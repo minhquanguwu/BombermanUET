@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.entities.*;
 import uet.oop.bomberman.entities.bomb.Bomb;
+import uet.oop.bomberman.entities.items.Item;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.awt.*;
@@ -45,7 +46,11 @@ public class Bomber extends Ally {
             Rectangle rectObject = new Rectangle(check.getX(), check.getY(), Sprite.SCALED_SIZE, Sprite.SCALED_SIZE);
             Rectangle rectBomber = new Rectangle(x, y, 24, Sprite.SCALED_SIZE);
             if (rectBomber.intersects(rectObject)) {
-                temp = check.collide(check);
+                if (check instanceof Item) {
+                    Bomb.flameSize++;
+                    check.Remove();
+                }
+                temp = check.collide(this);
                 if (temp == false) return temp;
             }
         }
