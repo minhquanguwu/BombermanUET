@@ -12,13 +12,12 @@ public abstract class AnimatedEntity extends Entity {
         super(x, y, img);
     }
 
+    public AnimatedEntity() {
+
+    }
+
     protected void animate() {
         if (animate < MAX_ANIMATE) animate++;
         else animate = 0;
     }
-
-    protected abstract void calculateMove();
-    protected abstract void move();
-    protected abstract boolean canMove(List<Entity> stillObjects, int x, int y, int status);
-
 }

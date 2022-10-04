@@ -15,6 +15,6 @@ public class Balloon extends Entity {
 
     @Override
     public void update() {
-        y++;
+
     }
 }

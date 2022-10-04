@@ -10,6 +10,9 @@ import javafx.stage.Stage;
 import uet.oop.bomberman.entities.*;
 import uet.oop.bomberman.entities.movingEntities.Balloon;
 import uet.oop.bomberman.entities.movingEntities.Bomber;
+import uet.oop.bomberman.entities.staticEntities.Brick;
+import uet.oop.bomberman.entities.staticEntities.Grass;
+import uet.oop.bomberman.entities.staticEntities.Wall;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.io.BufferedReader;
@@ -25,7 +28,10 @@ public class BombermanGame extends Application {
     private GraphicsContext gc;
     private Canvas canvas;
     private List<Entity> entities = new ArrayList<>();
+
+    public static List<Entity> enemies = new ArrayList<>();
     public static List<Entity> stillObjects = new ArrayList<>();
+    public static List<Entity> bombsObjects = new ArrayList<>();
 
 
     public static void main(String[] args) {
@@ -136,7 +142,7 @@ public class BombermanGame extends Application {
                         Entity object1  = new Grass(i, j, Sprite.grass.getFxImage());
                         stillObjects.add(object1);
                         Entity object  = new Balloon(i, j, Sprite.balloom_right1.getFxImage());
-                        entities.add(object);
+                        stillObjects.add(object);
                         break;
                     }
                     case '*': {
@@ -158,11 +164,26 @@ public class BombermanGame extends Application {
 
     public void update() {
         entities.forEach(Entity::update);
+        for (int i = 0; i < stillObjects.size(); i++) {
+            if (stillObjects.get(i).removed) {
+                stillObjects.remove(i);
+            }
+            stillObjects.get(i).update();
+        }
     }
 
     public void render() {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         stillObjects.forEach(g -> g.render(gc));
         entities.forEach(g -> g.render(gc));
+    }
+
+    public static List<Entity> FindList (int x, int y, List<Entity> CheckList) {
+        List<Entity> ResultList = new ArrayList<>();
+        for (Entity check : CheckList) {
+            if (check.getXUnit() == x && check.getYUnit() == y)
+                ResultList.add(check);
+        }
+        return ResultList;
     }
 }

@@ -9,6 +9,7 @@ import uet.oop.bomberman.graphics.Sprite;
 
 public abstract class Entity {
     //Tọa độ X tính từ góc trái trên trong Canvas
+    public boolean removed = false;
     protected int x;
 
     //Tọa độ Y tính từ góc trái trên trong Canvas
@@ -42,10 +43,17 @@ public abstract class Entity {
     public int getYUnit() {
         return y / Sprite.SCALED_SIZE;
     }
+    protected void setImg(Image img) {
+        this.img = img;
+    }
     public abstract boolean collide(Entity e);
 
     public void render(GraphicsContext gc) {
         gc.drawImage(img, x, y);
     }
     public abstract void update();
+
+    public void Remove() {
+        removed = true;
+    }
 }
