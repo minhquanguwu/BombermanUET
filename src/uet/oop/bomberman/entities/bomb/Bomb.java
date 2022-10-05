@@ -47,11 +47,12 @@ public class Bomb extends AnimatedEntity {
             setImg(temp);
             UpdateFlame();
         }
-        if (timeToExplode < -50) {
+        if (timeToExplode < -30) {
             FlameUp.clear();
             FlameDown.clear();
             FlameLeft.clear();
             FlameRight.clear();
+            Bomber.CountBomb--;
             this.Remove();
         }
     }
@@ -135,6 +136,8 @@ public class Bomb extends AnimatedEntity {
                         if (!check.collide(check)) {
                             if (check instanceof Brick) {
                                 ((Brick) check).isDestroy();
+                            } else if (check instanceof Bomb) {
+                                ((Bomb) check).timeToExplode = 1;
                             }
                             return tempSize - 1;
                         }
@@ -169,6 +172,8 @@ public class Bomb extends AnimatedEntity {
                         if (!check.collide(check)) {
                             if (check instanceof Brick) {
                                 ((Brick) check).isDestroy();
+                            } else if (check instanceof Bomb) {
+                                //((Bomb) check).timeToExplode = 1;
                             }
                             return tempSize - 1;
                         }

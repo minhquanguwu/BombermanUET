@@ -8,11 +8,17 @@ import java.util.List;
 
 public abstract class Ally extends AnimatedEntity {
 
+    int timeDestroy = 100;
+    boolean _isDestroy = false;
+
     public Ally(int x, int y, Image img) {
         super(x, y, img);
     }
 
-    protected abstract void calculateMove();
-    protected abstract void move();
+    public void destroy() {
+    }
+    public void isDestroy() {
+        _isDestroy = true;
+    }
     protected abstract boolean canMove(List<Entity> stillObjects, int x, int y);
 }

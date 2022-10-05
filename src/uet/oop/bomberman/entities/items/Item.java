@@ -6,6 +6,8 @@ import uet.oop.bomberman.entities.Entity;
 
 public class Item extends Entity {
 
+    public boolean hide = true;
+
     public Item(int x, int y, Image img) {
         super(x, y, img);
     }

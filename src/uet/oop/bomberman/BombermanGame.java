@@ -8,7 +8,9 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 import uet.oop.bomberman.entities.*;
+import uet.oop.bomberman.entities.items.BombItem;
 import uet.oop.bomberman.entities.items.FlameItem;
+import uet.oop.bomberman.entities.items.SpeedItem;
 import uet.oop.bomberman.entities.movingEntities.Balloon;
 import uet.oop.bomberman.entities.movingEntities.Bomber;
 import uet.oop.bomberman.entities.staticEntities.Brick;
@@ -28,7 +30,7 @@ public class BombermanGame extends Application {
     
     private GraphicsContext gc;
     private Canvas canvas;
-    private List<Entity> entities = new ArrayList<>();
+    public static List<Entity> entities = new ArrayList<>();
 
     public static List<Entity> enemies = new ArrayList<>();
     public static List<Entity> stillObjects = new ArrayList<>();
@@ -154,9 +156,29 @@ public class BombermanGame extends Application {
                         break;
                     }
                     case 'f': {
-                        Entity object1  = new Grass(i, j, Sprite.grass.getFxImage());
-                        stillObjects.add(object1);
-                        Entity object  = new FlameItem(i, j, Sprite.powerup_flames.getFxImage());
+                        Entity object  = new Grass(i, j, Sprite.grass.getFxImage());
+                        stillObjects.add(object);
+                        object  = new FlameItem(i, j, Sprite.powerup_flames.getFxImage());
+                        stillObjects.add(object);
+                        object = new Brick(i, j, Sprite.brick.getFxImage(), true);
+                        stillObjects.add(object);
+                        break;
+                    }
+                    case 's': {
+                        Entity object  = new Grass(i, j, Sprite.grass.getFxImage());
+                        stillObjects.add(object);
+                        object  = new SpeedItem(i, j, Sprite.powerup_speed.getFxImage());
+                        stillObjects.add(object);
+                        object  = new Brick(i, j, Sprite.brick.getFxImage(), true);
+                        stillObjects.add(object);
+                        break;
+                    }
+                    case 'b': {
+                        Entity object = new Grass(i, j, Sprite.grass.getFxImage());
+                        stillObjects.add(object);
+                        object  = new BombItem(i, j, Sprite.powerup_bombs.getFxImage());
+                        stillObjects.add(object);
+                        object  = new Brick(i, j, Sprite.brick.getFxImage(), true);
                         stillObjects.add(object);
                         break;
                     }
@@ -171,7 +193,6 @@ public class BombermanGame extends Application {
     }
 
     public void update() {
-        entities.forEach(Entity::update);
         for (int i = 0; i < enemies.size(); i++) {
             if (enemies.get(i).removed) {
                 enemies.remove(i);
@@ -179,7 +200,13 @@ public class BombermanGame extends Application {
             }
             enemies.get(i).update();
         }
-
+        for (int i = 0; i < entities.size(); i++) {
+            if (entities.get(i).removed) {
+                entities.remove(i);
+                continue;
+            }
+            entities.get(i).update();
+        }
         for (int i = 0; i < stillObjects.size(); i++) {
             if (stillObjects.get(i).removed) {
                 stillObjects.remove(i);

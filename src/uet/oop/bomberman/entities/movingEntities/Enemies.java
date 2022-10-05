@@ -18,6 +18,7 @@ public class Enemies extends AnimatedEntity {
 
     @Override
     public boolean collide(Entity e) {
+        if (e instanceof Enemies) return true;
         return false;
     }
 
