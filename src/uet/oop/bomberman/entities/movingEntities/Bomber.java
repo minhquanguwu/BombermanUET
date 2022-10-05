@@ -152,4 +152,6 @@ public class Bomber extends Ally {
         }
         return alive;
     }
+
+    // cmt
 }
