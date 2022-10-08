@@ -1,9 +1,12 @@
 package uet.oop.bomberman.entities.movingEntities;
 
 import javafx.scene.image.Image;
+import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.entities.AnimatedEntity;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.graphics.Sprite;
+
+import java.awt.*;
 
 public class Enemies extends AnimatedEntity {
 
@@ -27,6 +30,15 @@ public class Enemies extends AnimatedEntity {
 
     }
     protected boolean canMove(int x, int y) {
+        boolean temp = true;
+        for(Entity check : BombermanGame.staticObject) {
+            Rectangle rectObject = new Rectangle(check.getX(), check.getY(), Sprite.SCALED_SIZE, Sprite.SCALED_SIZE);
+            Rectangle rectBomber = new Rectangle(x, y, Sprite.SCALED_SIZE, Sprite.SCALED_SIZE);
+            if (rectBomber.intersects(rectObject)) {
+                temp = check.collide(check);
+                if (temp == false) return temp;
+            }
+        }
         return true;
     }
 

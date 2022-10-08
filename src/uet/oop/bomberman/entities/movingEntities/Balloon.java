@@ -1,23 +1,12 @@
 package uet.oop.bomberman.entities.movingEntities;
 
 import javafx.scene.image.Image;
-import uet.oop.bomberman.BombermanGame;
-import uet.oop.bomberman.entities.AnimatedEntity;
-import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.graphics.Sprite;
-
-import java.awt.*;
-
 
 public class Balloon extends Enemies {
     public Balloon(int x, int y, Image image) {
         super(x, y, image);
         this.Status = 3;
-    }
-
-    @Override
-    public boolean collide(Entity e) {
-        return false;
     }
     @Override
     public void update() {
@@ -44,20 +33,6 @@ public class Balloon extends Enemies {
             }
         }
         setImg(temp);
-    }
-
-    @Override
-    protected boolean canMove(int x, int y) {
-        boolean temp = true;
-        for(Entity check : BombermanGame.stillObjects) {
-            Rectangle rectObject = new Rectangle(check.getX(), check.getY(), Sprite.SCALED_SIZE, Sprite.SCALED_SIZE);
-            Rectangle rectBomber = new Rectangle(x, y, Sprite.SCALED_SIZE, Sprite.SCALED_SIZE);
-            if (rectBomber.intersects(rectObject)) {
-                temp = check.collide(check);
-                if (temp == false) return temp;
-            }
-        }
-        return true;
     }
 
     @Override
