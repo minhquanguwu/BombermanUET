@@ -6,11 +6,9 @@ import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.entities.AnimatedEntity;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.movingEntities.Bomber;
-import uet.oop.bomberman.entities.movingEntities.Enemies;
 import uet.oop.bomberman.entities.staticEntities.Brick;
 import uet.oop.bomberman.graphics.Sprite;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +19,7 @@ public class Bomb extends AnimatedEntity {
     private List<Entity> FlameLeft = new ArrayList<>();
     private List<Entity> FlameRight = new ArrayList<>();
     protected int timeToExplode = 200;
-    public static int flameSize = 1;
+    public static int flameSize = 10;
 
     public Bomb(int x, int y, Image img) {
         super(x, y, img);
@@ -114,7 +112,7 @@ public class Bomb extends AnimatedEntity {
             case 0 : {
                 int tempSize = 1;
                 while (tempSize <= flameSize) {
-                    List<Entity> CheckList = BombermanGame.FindList(this.getXUnit(), this.getYUnit() - tempSize, BombermanGame.stillObjects);
+                    List<Entity> CheckList = BombermanGame.FindList(this.getXUnit(), this.getYUnit() - tempSize, BombermanGame.staticObject);
                     for (Entity check : CheckList) {
                         if (!check.collide(check)) {
                             if (check instanceof Brick) {
@@ -131,7 +129,7 @@ public class Bomb extends AnimatedEntity {
             case 1 : {
                 int tempSize = 1;
                 while (tempSize <= flameSize) {
-                    List<Entity> CheckList = BombermanGame.FindList(this.getXUnit(), this.getYUnit() + tempSize, BombermanGame.stillObjects);
+                    List<Entity> CheckList = BombermanGame.FindList(this.getXUnit(), this.getYUnit() + tempSize, BombermanGame.staticObject);
                     for (Entity check : CheckList) {
                         if (!check.collide(check)) {
                             if (check instanceof Brick) {
@@ -150,7 +148,7 @@ public class Bomb extends AnimatedEntity {
             case 2 : {
                 int tempSize = 1;
                 while (tempSize <= flameSize) {
-                    List<Entity> CheckList = BombermanGame.FindList(this.getXUnit() - tempSize, this.getYUnit(), BombermanGame.stillObjects);
+                    List<Entity> CheckList = BombermanGame.FindList(this.getXUnit() - tempSize, this.getYUnit(), BombermanGame.staticObject);
                     for (Entity check : CheckList) {
                         if (!check.collide(check)) {
                             if (check instanceof Brick) {
@@ -167,7 +165,7 @@ public class Bomb extends AnimatedEntity {
             case 3 : {
                 int tempSize = 1;
                 while (tempSize <= flameSize) {
-                    List<Entity> CheckList = BombermanGame.FindList(this.getXUnit() + tempSize, this.getYUnit(), BombermanGame.stillObjects);
+                    List<Entity> CheckList = BombermanGame.FindList(this.getXUnit() + tempSize, this.getYUnit(), BombermanGame.staticObject);
                     for (Entity check : CheckList) {
                         if (!check.collide(check)) {
                             if (check instanceof Brick) {

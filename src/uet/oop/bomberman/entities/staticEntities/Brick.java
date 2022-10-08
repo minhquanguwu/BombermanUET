@@ -3,7 +3,6 @@ import javafx.scene.image.Image;
 import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.entities.AnimatedEntity;
 import uet.oop.bomberman.entities.Entity;
-import uet.oop.bomberman.entities.StaticEntity;
 import uet.oop.bomberman.entities.items.Item;
 import uet.oop.bomberman.graphics.Sprite;
 
@@ -43,7 +42,7 @@ public class Brick extends AnimatedEntity {
         setImg(temp);
         if (timeDestroy < 0) {
             if (hideItem == true) {
-                List<Entity> CheckList = BombermanGame.FindList(this.getXUnit(), this.getYUnit(), BombermanGame.stillObjects);
+                List<Entity> CheckList = BombermanGame.FindList(this.getXUnit(), this.getYUnit(), BombermanGame.staticObject);
                 for (Entity check : CheckList) {
                     if (check instanceof Item) {
                         ((Item) check).hide = false;

@@ -76,7 +76,7 @@ public class Bomber extends Ally {
         }
         switch (STATUS) {
             case 0: {
-                if (canMove(BombermanGame.stillObjects, x, y - STEP)) {
+                if (canMove(BombermanGame.staticObject, x, y - STEP)) {
                     y -= STEP;
                 }
                 Image temp = Sprite.movingSprite(Sprite.player_up, Sprite.player_up_1, Sprite.player_up_2, animate, 50).getFxImage();
@@ -84,7 +84,7 @@ public class Bomber extends Ally {
                 break;
             }
             case 1: {
-                if (canMove(BombermanGame.stillObjects, x, y + STEP)) {
+                if (canMove(BombermanGame.staticObject, x, y + STEP)) {
                     y += STEP;
                 }
                 Image temp = Sprite.movingSprite(Sprite.player_down, Sprite.player_down_1, Sprite.player_down_2, animate, 50).getFxImage();
@@ -92,7 +92,7 @@ public class Bomber extends Ally {
                 break;
             }
             case 2: {
-                if (canMove(BombermanGame.stillObjects, x - STEP, y)) {
+                if (canMove(BombermanGame.staticObject, x - STEP, y)) {
                     x -= STEP;
                 }
                 Image temp = Sprite.movingSprite(Sprite.player_left, Sprite.player_left_1, Sprite.player_left_2, animate, 50).getFxImage();
@@ -100,7 +100,7 @@ public class Bomber extends Ally {
                 break;
             }
             case 3: {
-                if (canMove(BombermanGame.stillObjects, x + STEP, y)) {
+                if (canMove(BombermanGame.staticObject, x + STEP, y)) {
                     x += STEP;
                 }
                 Image temp = Sprite.movingSprite(Sprite.player_right, Sprite.player_right_1, Sprite.player_right_2, animate, 50).getFxImage();
@@ -127,7 +127,7 @@ public class Bomber extends Ally {
 
     protected void placeBomb() {
         Entity object = new Bomb(this.getXUnit(), this.getYUnit(), Sprite.bomb.getFxImage());
-        BombermanGame.stillObjects.add(object);
+        BombermanGame.staticObject.add(object);
         CountBomb++;
         timeBetweenBomb = 50;
     }
@@ -152,6 +152,4 @@ public class Bomber extends Ally {
         }
         return alive;
     }
-
-    // cmt
 }
