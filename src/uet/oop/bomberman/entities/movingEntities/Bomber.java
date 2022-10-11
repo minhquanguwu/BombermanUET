@@ -17,7 +17,6 @@ import java.util.List;
 public class Bomber extends Ally {
     private int STEP = 4;
     private boolean alive = true;
-
     public int STATUS = -1;
     public int MaxBomb = 1;
     public static int CountBomb = 0;

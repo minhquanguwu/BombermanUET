@@ -16,10 +16,11 @@ public abstract class GeneralScene extends Scene {
 
 
     protected GraphicsContext gc;
-    protected StackPane root;
+    protected StackPane root = new StackPane();
 
     public GeneralScene() {
         super(new StackPane(), Sprite.SCALED_SIZE * WIDTH, Sprite.SCALED_SIZE * HEIGHT);
+
     }
 
     public abstract void draw();

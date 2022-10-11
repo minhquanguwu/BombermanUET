@@ -1,7 +1,12 @@
 package uet.oop.bomberman.entities.movingEntities;
 
 import javafx.scene.image.Image;
+import uet.oop.bomberman.BombermanGame;
+import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.graphics.Sprite;
+
+import static uet.oop.bomberman.BombermanGame.enemies;
+import static uet.oop.bomberman.BombermanGame.staticObject;
 
 public class Balloon extends Enemies {
     public Balloon(int x, int y, Image image) {
@@ -38,8 +43,10 @@ public class Balloon extends Enemies {
     @Override
     public void destroy() {
         timeDestroy--;
-        Image temp = Sprite.movingSprite(Sprite.balloom_dead, Sprite.balloom_right3, animate, 20).getFxImage();
+        Image temp = Sprite.movingSprite(Sprite.balloom_dead, Sprite.mob_dead1, Sprite.mob_dead2, animate, 20).getFxImage();
         setImg(temp);
-        if (timeDestroy < 0) this.Remove();
+        if (timeDestroy < 0) {
+            this.Remove();
+        }
     }
 }

@@ -19,7 +19,7 @@ public class Bomb extends AnimatedEntity {
     private List<Entity> FlameLeft = new ArrayList<>();
     private List<Entity> FlameRight = new ArrayList<>();
     protected int timeToExplode = 200;
-    public static int flameSize = 10;
+    public static int flameSize = 1;
 
     public Bomb(int x, int y, Image img) {
         super(x, y, img);
@@ -117,6 +117,8 @@ public class Bomb extends AnimatedEntity {
                         if (!check.collide(check)) {
                             if (check instanceof Brick) {
                                 ((Brick) check).isDestroy();
+                            } else if (check instanceof Bomb && ((Bomb) check).timeToExplode > 0 ) {
+                                ((Bomb) check).timeToExplode = 1;
                             }
                             return tempSize - 1;
                         }
@@ -134,7 +136,7 @@ public class Bomb extends AnimatedEntity {
                         if (!check.collide(check)) {
                             if (check instanceof Brick) {
                                 ((Brick) check).isDestroy();
-                            } else if (check instanceof Bomb) {
+                            } else if (check instanceof Bomb && ((Bomb) check).timeToExplode > 0 ) {
                                 ((Bomb) check).timeToExplode = 1;
                             }
                             return tempSize - 1;
@@ -153,6 +155,8 @@ public class Bomb extends AnimatedEntity {
                         if (!check.collide(check)) {
                             if (check instanceof Brick) {
                                 ((Brick) check).isDestroy();
+                            } else if (check instanceof Bomb && ((Bomb) check).timeToExplode > 0 ) {
+                                ((Bomb) check).timeToExplode = 1;
                             }
                             return tempSize - 1;
                         }
@@ -170,8 +174,8 @@ public class Bomb extends AnimatedEntity {
                         if (!check.collide(check)) {
                             if (check instanceof Brick) {
                                 ((Brick) check).isDestroy();
-                            } else if (check instanceof Bomb) {
-                                //((Bomb) check).timeToExplode = 1;
+                            } else if (check instanceof Bomb && ((Bomb) check).timeToExplode > 0 ) {
+                                ((Bomb) check).timeToExplode = 1;
                             }
                             return tempSize - 1;
                         }

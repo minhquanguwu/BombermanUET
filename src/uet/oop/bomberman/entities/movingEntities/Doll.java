@@ -58,7 +58,7 @@ public class Doll extends Enemies {
     @Override
     public void destroy() {
         timeDestroy--;
-        Image temp = Sprite.movingSprite(Sprite.doll_dead, Sprite.doll_right3, animate, 20).getFxImage();
+        Image temp = Sprite.movingSprite(Sprite.doll_dead, Sprite.mob_dead1, Sprite.mob_dead2, animate, 20).getFxImage();
         setImg(temp);
         if (timeDestroy < 0) this.Remove();
     }

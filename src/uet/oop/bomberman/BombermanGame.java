@@ -1,14 +1,23 @@
 package uet.oop.bomberman;
 
 import javafx.animation.AnimationTimer;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import uet.oop.bomberman.Scenes.GeneralScene;
+import uet.oop.bomberman.Scenes.WelcomeScene;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.movingEntities.Bomber;
 import uet.oop.bomberman.graphics.Sprite;
+import uet.oop.bomberman.ui.Menu;
 
 
 import java.util.ArrayList;
@@ -29,9 +38,10 @@ public class BombermanGame extends GeneralScene {
         canvas = new Canvas(Sprite.SCALED_SIZE * WIDTH, Sprite.SCALED_SIZE * HEIGHT);
         gc = canvas.getGraphicsContext2D();
 
+
         // Tao root container
-        Group root = new Group();
         root.getChildren().add(canvas);
+        root.setBackground(new Background(new BackgroundFill(Color.YELLOWGREEN, CornerRadii.EMPTY, Insets.EMPTY)));
 
         // Tao scene
         this.setRoot(root);
@@ -77,6 +87,11 @@ public class BombermanGame extends GeneralScene {
                     ((Bomber) bomberman).STATUS = 4;
                     break;
                 }
+//                case P:
+//                {
+//                    Game.setScene(Game.Welcome_Scene);
+//                    break;
+//                }
                 default:
                     break;
             }
