@@ -5,7 +5,7 @@ import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.entities.AnimatedEntity;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.movingEntities.Bomber;
-import uet.oop.bomberman.entities.movingEntities.Enemies;
+import uet.oop.bomberman.entities.movingEntities.enemy.Enemies;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.util.List;

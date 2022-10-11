@@ -1,4 +1,4 @@
-package uet.oop.bomberman.entities.movingEntities;
+package uet.oop.bomberman.entities.movingEntities.enemy;
 
 import javafx.scene.image.Image;
 import uet.oop.bomberman.BombermanGame;
@@ -35,7 +35,7 @@ public class Enemies extends AnimatedEntity {
             Rectangle rectObject = new Rectangle(check.getX(), check.getY(), Sprite.SCALED_SIZE, Sprite.SCALED_SIZE);
             Rectangle rectBomber = new Rectangle(x, y, Sprite.SCALED_SIZE, Sprite.SCALED_SIZE);
             if (rectBomber.intersects(rectObject)) {
-                temp = check.collide(check);
+                temp = check.collide(this);
                 if (temp == false) return temp;
             }
         }

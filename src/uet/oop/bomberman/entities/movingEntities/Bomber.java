@@ -8,6 +8,7 @@ import uet.oop.bomberman.entities.items.BombItem;
 import uet.oop.bomberman.entities.items.FlameItem;
 import uet.oop.bomberman.entities.items.Item;
 import uet.oop.bomberman.entities.items.SpeedItem;
+import uet.oop.bomberman.entities.movingEntities.enemy.Enemies;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.awt.*;
