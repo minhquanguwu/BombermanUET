@@ -17,6 +17,7 @@ import uet.oop.bomberman.Scenes.WelcomeScene;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.movingEntities.Bomber;
 import uet.oop.bomberman.graphics.Sprite;
+import uet.oop.bomberman.sound.Sound;
 import uet.oop.bomberman.ui.Menu;
 
 
@@ -28,12 +29,17 @@ public class BombermanGame extends GeneralScene {
     public static final int WIDTH = 31;
     public static final int HEIGHT = 13;
 
+    private static Sound sound1;
     private GraphicsContext gc;
     private Canvas canvas;
     public static List<Entity> entities = new ArrayList<>();
     public static List<Entity> enemies = new ArrayList<>();
     public static List<Entity> staticObject = new ArrayList<>();
     public BombermanGame() {
+        //Sound
+        sound1 = new Sound();
+        playMusic(1);
+
         // Tao Canvas
         canvas = new Canvas(Sprite.SCALED_SIZE * WIDTH, Sprite.SCALED_SIZE * HEIGHT);
         gc = canvas.getGraphicsContext2D();
@@ -141,6 +147,21 @@ public class BombermanGame extends GeneralScene {
     @Override
     public void draw() {
 
+    }
+
+    public void playMusic(int i) {
+        sound1.setFile(i);
+        sound1.play();
+        sound1.loop();
+    }
+
+    public static void stopMusic() {
+        sound1.stop();
+    }
+
+    public static void playSoundEffect(int i) {
+        sound1.setFile(i);
+        sound1.play();
     }
 
 }

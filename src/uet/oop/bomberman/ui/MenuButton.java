@@ -3,6 +3,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import uet.oop.bomberman.Game;
+import uet.oop.bomberman.Scenes.WelcomeScene;
 
 public class MenuButton extends Button {
     private static final int B_WIDTH = 140;
@@ -16,6 +17,7 @@ public class MenuButton extends Button {
                 a1 = "/play.png";
                 a2 = "/play3.png";
                 this.setOnAction(e -> {
+                    WelcomeScene.stopMusic();
                     Game.initGame();
                     Game.setScene(Game.Game_Scene);
                 });

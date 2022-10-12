@@ -40,6 +40,7 @@ public class Bomb extends AnimatedEntity {
             setImg(temp);
         } else if (timeToExplode == 0) {
             this.explode();
+            BombermanGame.playSoundEffect(3);
         } else if(timeToExplode < 0) {
             Image temp = Sprite.movingSprite(Sprite.bomb_exploded,Sprite.bomb_exploded1, Sprite.bomb_exploded2, animate, 50).getFxImage();
             setImg(temp);

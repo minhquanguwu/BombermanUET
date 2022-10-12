@@ -51,6 +51,7 @@ public class Bomber extends Ally {
                     if (check instanceof BombItem) {
                         MaxBomb++;
                     }
+                    BombermanGame.playSoundEffect(4);
                     check.Remove();
                 }
                 temp = check.collide(this);
@@ -130,6 +131,7 @@ public class Bomber extends Ally {
         BombermanGame.staticObject.add(object);
         CountBomb++;
         timeBetweenBomb = 50;
+        BombermanGame.playSoundEffect(2);
     }
 
     @Override

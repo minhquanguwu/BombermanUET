@@ -14,6 +14,7 @@ import javafx.scene.text.Text;
 import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.Game;
 import uet.oop.bomberman.graphics.Sprite;
+import uet.oop.bomberman.sound.Sound;
 import uet.oop.bomberman.ui.Menu;
 import uet.oop.bomberman.ui.MenuButton;
 
@@ -25,9 +26,13 @@ import java.net.URL;
 public class WelcomeScene extends GeneralScene {
     protected GraphicsContext gc;
     private Canvas canvas;
+    static Sound sound = new Sound();
 
     private Image img;
     public WelcomeScene() {
+        //Sound
+        playMusic(0);
+
         //draw MenuBoard
         this.draw();
 
@@ -49,6 +54,16 @@ public class WelcomeScene extends GeneralScene {
         canvas = new Canvas(Sprite.SCALED_SIZE * WIDTH, Sprite.SCALED_SIZE * HEIGHT);
         gc = canvas.getGraphicsContext2D();
         gc.drawImage(new Image("/menu_background.png"), 355, 40);
+    }
+
+    public void playMusic(int i) {
+        sound.setFile(i);
+        sound.play();
+        sound.loop();
+    }
+
+    public static void stopMusic() {
+        sound.stop();
     }
 
 }
