@@ -4,6 +4,7 @@ import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.entities.AnimatedEntity;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.items.Item;
+import uet.oop.bomberman.entities.movingEntities.Bomber;
 import uet.oop.bomberman.entities.movingEntities.enemy.Ghost;
 import uet.oop.bomberman.entities.movingEntities.enemy.Minvo;
 import uet.oop.bomberman.graphics.Sprite;
