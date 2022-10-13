@@ -65,6 +65,12 @@ public class FlameSegment extends AnimatedEntity {
                 checkBomber();
                 break;
             }
+            case 4: {
+                temp = Sprite.movingSprite(Sprite.bomb_exploded,Sprite.bomb_exploded1, Sprite.bomb_exploded2, animate, 50).getFxImage();
+                checkEnemy();
+                checkBomber();
+                break;
+            }
         }
         setImg(temp);
     }

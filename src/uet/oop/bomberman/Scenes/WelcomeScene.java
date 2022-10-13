@@ -26,11 +26,15 @@ import java.net.URL;
 public class WelcomeScene extends GeneralScene {
     protected GraphicsContext gc;
     private Canvas canvas;
-    static Sound sound = new Sound();
+    static Sound sound;
 
     private Image img;
     public WelcomeScene() {
+        //Clear root
+        root.getChildren().clear();
+
         //Sound
+        sound = new Sound();
         playMusic(0);
 
         //draw MenuBoard
@@ -57,9 +61,8 @@ public class WelcomeScene extends GeneralScene {
     }
 
     public void playMusic(int i) {
-        sound.setFile(i);
-        sound.play();
-        sound.loop();
+        sound.setFileMedia(i);
+        sound.playMediaLoop();
     }
 
     public static void stopMusic() {

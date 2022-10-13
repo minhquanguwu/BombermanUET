@@ -11,8 +11,6 @@ import javafx.scene.layout.*;
 import uet.oop.bomberman.graphics.Sprite;
 
 public class Menu extends VBox {
-    protected GraphicsContext gc;
-    private Canvas canvas;
     public Menu() {
         Image image5 = new Image("/menu_background.png");
 

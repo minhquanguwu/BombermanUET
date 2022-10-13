@@ -26,6 +26,18 @@ public class MenuButton extends Button {
             case 1: {
                 a1 = "/quit1.png";
                 a2 = "/quit2.png";
+                this.setOnAction(e -> {
+                    System.exit(0);
+                });
+                break;
+            }
+            case 2: {
+                a1 = "/play.png";
+                a2 = "/play3.png";
+                this.setOnAction(e -> {
+                    Game.initWelcomeScene();
+                    Game.setScene(Game.Welcome_Scene);
+                });
                 break;
             }
             default:

@@ -2,6 +2,7 @@ package uet.oop.bomberman.entities.movingEntities;
 
 import javafx.scene.image.Image;
 import uet.oop.bomberman.BombermanGame;
+import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.*;
 import uet.oop.bomberman.entities.bomb.Bomb;
 import uet.oop.bomberman.entities.items.BombItem;
@@ -139,7 +140,10 @@ public class Bomber extends Ally {
         timeDestroy--;
         Image temp = Sprite.movingSprite(Sprite.player_dead1, Sprite.player_dead2, Sprite.player_dead3, animate, 30).getFxImage();
         setImg(temp);
-        if (timeDestroy < 0) this.Remove();
+        if (timeDestroy < 0) {
+            BombermanGame.Game_Running = false;
+            this.Remove();
+        }
     }
 
     public boolean isAlive() {

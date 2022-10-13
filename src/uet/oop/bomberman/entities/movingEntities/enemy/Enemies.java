@@ -12,11 +12,12 @@ public class Enemies extends AnimatedEntity {
 
     int timeDestroy = 100;
     boolean _isDestroy = false;
-    protected int STEP = 1;
+    protected int STEP;
     protected int Status;
 
     public Enemies(int x, int y, Image image) {
         super(x, y, image);
+        STEP = 1;
     }
 
     @Override

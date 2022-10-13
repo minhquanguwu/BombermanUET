@@ -18,8 +18,9 @@ public class Bomb extends AnimatedEntity {
     private List<Entity> FlameDown = new ArrayList<>();
     private List<Entity> FlameLeft = new ArrayList<>();
     private List<Entity> FlameRight = new ArrayList<>();
+    private List<Entity> FlameCenter = new ArrayList<>();
     protected int timeToExplode = 200;
-    public static int flameSize = 1;
+    public static int flameSize = 5;
 
     public Bomb(int x, int y, Image img) {
         super(x, y, img);
@@ -42,11 +43,10 @@ public class Bomb extends AnimatedEntity {
             this.explode();
             BombermanGame.playSoundEffect(3);
         } else if(timeToExplode < 0) {
-            Image temp = Sprite.movingSprite(Sprite.bomb_exploded,Sprite.bomb_exploded1, Sprite.bomb_exploded2, animate, 50).getFxImage();
-            setImg(temp);
             UpdateFlame();
         }
         if (timeToExplode < -30) {
+            FlameCenter.clear();
             FlameUp.clear();
             FlameDown.clear();
             FlameLeft.clear();
@@ -68,6 +68,10 @@ public class Bomb extends AnimatedEntity {
         setFlame();
     }
 
+    protected void setFlameCenter() {
+        Entity temp = new FlameSegment(this.getXUnit(), this.getYUnit(), 4, false);
+        FlameUp.add(temp);
+    }
     protected void setFlameUp() {
         int Size = caculateFlameSize(0);
         for (int i = 0; i < Size; i++) {
@@ -191,18 +195,21 @@ public class Bomb extends AnimatedEntity {
     }
 
     private void UpdateFlame() {
+        FlameCenter.forEach(Entity::update);
         FlameUp.forEach(Entity::update);
         FlameDown.forEach(Entity::update);
         FlameLeft.forEach(Entity::update);
         FlameRight.forEach(Entity::update);
     }
     private void RenderFlame(GraphicsContext gc) {
+        FlameCenter.forEach(g -> g.render(gc));
         FlameUp.forEach(g -> g.render(gc));
         FlameDown.forEach(g -> g.render(gc));
         FlameLeft.forEach(g -> g.render(gc));
         FlameRight.forEach(g -> g.render(gc));
     }
     private void setFlame() {
+        setFlameCenter();
         setFlameUp();
         setFlameDown();
         setFlameLeft();

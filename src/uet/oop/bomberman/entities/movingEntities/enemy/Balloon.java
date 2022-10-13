@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import uet.oop.bomberman.graphics.Sprite;
 
 public class Balloon extends Enemies {
+
     public Balloon(int x, int y, Image image) {
         super(x, y, image);
         this.Status = 3;

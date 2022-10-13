@@ -23,7 +23,7 @@ public class Map {
         createMapFromFile();
     }
     public void createMapFromFile() {
-        int level = 2;
+        int level = Game.level;
         List<String> list = new ArrayList<>();
         try {
             FileReader fr = new FileReader("res\\levels\\Level" + level + ".txt");//doc tep luu map
