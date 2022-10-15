@@ -1,87 +1,73 @@
 package uet.oop.bomberman.Scenes;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
+import javafx.geometry.Insets;
+
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.Game;
 import uet.oop.bomberman.graphics.Sprite;
+import uet.oop.bomberman.sound.Sound;
+import uet.oop.bomberman.ui.Menu;
+import uet.oop.bomberman.ui.MenuButton;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
 public class WelcomeScene extends GeneralScene {
-
-    public static final String IMAGE_PATH = "res/button_atlas.png";
     protected GraphicsContext gc;
-
     private Canvas canvas;
-
+    static Sound sound;
 
     private Image img;
-    public WelcomeScene() throws IOException {
-//        URL fxmlLocation = Game.class.getResource("Mixi.fxml");
-//        System.out.println(fxmlLocation);
-//        FXMLLoader loader = new FXMLLoader(fxmlLocation);
-//        AnchorPane root = loader.load();
+    public WelcomeScene() {
+        //Clear root
+        root.getChildren().clear();
 
-        canvas = new Canvas(Sprite.SCALED_SIZE * WIDTH, Sprite.SCALED_SIZE * HEIGHT);
-        gc = canvas.getGraphicsContext2D();
+        //Sound
+        sound = new Sound();
+        playMusic(0);
 
-        // Tao root container
-        Group root = new Group();
+        //draw MenuBoard
+        this.draw();
+
+        // Tao root container va add Button
+        Menu menu = new Menu();
+        StackPane root = new StackPane();
         root.getChildren().add(canvas);
 
-        // load the tron font.
-        Font.loadFont(
-                Game.class.getResource("/Retro Gaming.TTF").toExternalForm(),
-                10
-        );
-
-
-        Button button1 = new Button();
-        Text a = new Text(200, 300, "Arsenal");
-        a.setStyle("-fx-font-size:60; -fx-font-family: 'Rockwell Extra Bold' ");
-        button1.setText("Hello");
-        button1.setStyle("-fx-font-size:40; -fx-font-family: 'Rockwell Extra Bold' ");
-
-
-        Image image = new Image("/play.png");
-        ImageView imageView = new ImageView(image);
-
-        // Button 2
-        Button button2 = new Button("", imageView);
-
-
-        root.getChildren().add(a);
-        root.getChildren().add(button2);
-
         // Tao scene
+        root.setPadding(new Insets(41, 355, 40, 356));
+        root.getChildren().add(menu);
+        root.setStyle("-fx-background-image: url(bgmenu1.jpg); " +
+                      "-fx-backgroun-size: cover");
         this.setRoot(root);
 
-
-        this.setOnKeyPressed(e -> {
-            switch (e.getCode()) {
-                case SPACE: {
-                    Game.initGame();
-                    Game.setScene(Game.Game_Scene);
-                }
-            }
-        });
     }
 
     @Override
     public void draw() {
+        canvas = new Canvas(Sprite.SCALED_SIZE * WIDTH, Sprite.SCALED_SIZE * HEIGHT);
+        gc = canvas.getGraphicsContext2D();
+        gc.drawImage(new Image("/menu_background.png"), 355, 40);
+    }
 
+    public void playMusic(int i) {
+        sound.setFileMedia(i);
+        sound.playMediaLoop();
+    }
+
+    public static void stopMusic() {
+        sound.stop();
     }
 
 }

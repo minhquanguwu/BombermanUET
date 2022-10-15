@@ -3,9 +3,9 @@ package uet.oop.bomberman;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.items.BombItem;
 import uet.oop.bomberman.entities.items.FlameItem;
+import uet.oop.bomberman.entities.items.PortalIem;
 import uet.oop.bomberman.entities.items.SpeedItem;
-import uet.oop.bomberman.entities.movingEntities.Balloon;
-import uet.oop.bomberman.entities.movingEntities.Doll;
+import uet.oop.bomberman.entities.movingEntities.enemy.*;
 import uet.oop.bomberman.entities.staticEntities.Brick;
 import uet.oop.bomberman.entities.staticEntities.Grass;
 import uet.oop.bomberman.entities.staticEntities.Wall;
@@ -24,7 +24,7 @@ public class Map {
         createMapFromFile();
     }
     public void createMapFromFile() {
-        int level = 1;
+        int level = Game.level;
         List<String> list = new ArrayList<>();
         try {
             FileReader fr = new FileReader("res\\levels\\Level" + level + ".txt");//doc tep luu map
@@ -71,6 +71,34 @@ public class Map {
                         enemies.add(object);
                         break;
                     }
+                    case '3': {
+                        Entity object1  = new Grass(i, j, Sprite.grass.getFxImage());
+                        staticObject.add(object1);
+                        Entity object  = new Oneal(i, j, Sprite.oneal_right3.getFxImage());
+                        enemies.add(object);
+                        break;
+                    }
+                    case '4': {
+                        Entity object1  = new Grass(i, j, Sprite.grass.getFxImage());
+                        staticObject.add(object1);
+                        Entity object  = new Minvo(i, j, Sprite.minvo_right3.getFxImage());
+                        enemies.add(object);
+                        break;
+                    }
+                    case '5': {
+                        Entity object1  = new Grass(i, j, Sprite.grass.getFxImage());
+                        staticObject.add(object1);
+                        Entity object  = new Kondoria(i, j, Sprite.kondoria_right3.getFxImage());
+                        enemies.add(object);
+                        break;
+                    }
+                    case '6': {
+                        Entity object1  = new Grass(i, j, Sprite.grass.getFxImage());
+                        staticObject.add(object1);
+                        Entity object  = new Ghost(i, j, Sprite.ghost_right3.getFxImage());
+                        enemies.add(object);
+                        break;
+                    }
                     case '*': {
                         Entity object1  = new Grass(i, j, Sprite.grass.getFxImage());
                         staticObject.add(object1);
@@ -100,6 +128,15 @@ public class Map {
                         Entity object = new Grass(i, j, Sprite.grass.getFxImage());
                         staticObject.add(object);
                         object  = new BombItem(i, j, Sprite.powerup_bombs.getFxImage());
+                        staticObject.add(object);
+                        object  = new Brick(i, j, Sprite.brick.getFxImage(), true);
+                        staticObject.add(object);
+                        break;
+                    }
+                    case 'x': {
+                        Entity object = new Grass(i, j, Sprite.grass.getFxImage());
+                        staticObject.add(object);
+                        object  = new PortalIem(i, j, Sprite.portal.getFxImage());
                         staticObject.add(object);
                         object  = new Brick(i, j, Sprite.brick.getFxImage(), true);
                         staticObject.add(object);

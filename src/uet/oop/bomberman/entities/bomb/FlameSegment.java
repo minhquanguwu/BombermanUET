@@ -5,7 +5,7 @@ import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.entities.AnimatedEntity;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.movingEntities.Bomber;
-import uet.oop.bomberman.entities.movingEntities.Enemies;
+import uet.oop.bomberman.entities.movingEntities.enemy.Enemies;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.util.List;
@@ -61,6 +61,12 @@ public class FlameSegment extends AnimatedEntity {
                 } else {
                     temp = Sprite.movingSprite(Sprite.explosion_horizontal, Sprite.explosion_horizontal1, Sprite.explosion_horizontal2, animate, 50).getFxImage();
                 }
+                checkEnemy();
+                checkBomber();
+                break;
+            }
+            case 4: {
+                temp = Sprite.movingSprite(Sprite.bomb_exploded,Sprite.bomb_exploded1, Sprite.bomb_exploded2, animate, 50).getFxImage();
                 checkEnemy();
                 checkBomber();
                 break;

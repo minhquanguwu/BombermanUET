@@ -2,12 +2,11 @@ package uet.oop.bomberman.entities.movingEntities;
 
 import javafx.scene.image.Image;
 import uet.oop.bomberman.BombermanGame;
+import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.*;
 import uet.oop.bomberman.entities.bomb.Bomb;
-import uet.oop.bomberman.entities.items.BombItem;
-import uet.oop.bomberman.entities.items.FlameItem;
-import uet.oop.bomberman.entities.items.Item;
-import uet.oop.bomberman.entities.items.SpeedItem;
+import uet.oop.bomberman.entities.items.*;
+import uet.oop.bomberman.entities.movingEntities.enemy.Enemies;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.awt.*;
@@ -17,7 +16,6 @@ import java.util.List;
 public class Bomber extends Ally {
     private int STEP = 4;
     private boolean alive = true;
-
     public int STATUS = -1;
     public int MaxBomb = 1;
     public static int CountBomb = 0;
@@ -51,6 +49,11 @@ public class Bomber extends Ally {
                     if (check instanceof BombItem) {
                         MaxBomb++;
                     }
+                    if (check instanceof PortalIem) {
+                        if(BombermanGame.enemies.size() != 0)  continue;
+                        BombermanGame.NextLevel = true;
+                    }
+                    BombermanGame.playSoundEffect(4);
                     check.Remove();
                 }
                 temp = check.collide(this);
@@ -130,6 +133,7 @@ public class Bomber extends Ally {
         BombermanGame.staticObject.add(object);
         CountBomb++;
         timeBetweenBomb = 50;
+        BombermanGame.playSoundEffect(2);
     }
 
     @Override
@@ -137,7 +141,10 @@ public class Bomber extends Ally {
         timeDestroy--;
         Image temp = Sprite.movingSprite(Sprite.player_dead1, Sprite.player_dead2, Sprite.player_dead3, animate, 30).getFxImage();
         setImg(temp);
-        if (timeDestroy < 0) this.Remove();
+        if (timeDestroy < 0) {
+            BombermanGame.Game_Running = false;
+            this.Remove();
+        }
     }
 
     public boolean isAlive() {
