@@ -22,6 +22,7 @@ import uet.oop.bomberman.entities.movingEntities.Bomber;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.sound.Sound;
 import uet.oop.bomberman.ui.Menu;
+import uet.oop.bomberman.ui.Pause;
 
 
 import java.util.ArrayList;
@@ -34,11 +35,14 @@ public class BombermanGame extends GeneralScene {
     public static final int WIDTH = 31;
     public static final int HEIGHT = 13;
 
-    public boolean Game_Pause = false;
+    public static boolean Game_Pause = false;
     public static boolean Game_Running = true;
+    public static boolean NextLevel = false;
     private static Sound sound1;
+    private Pause pause = new Pause();
     private GraphicsContext gc;
     private Canvas canvas;
+
     public static List<Entity> entities = new ArrayList<>();
     public static List<Entity> enemies = new ArrayList<>();
     public static List<Entity> staticObject = new ArrayList<>();
@@ -63,7 +67,8 @@ public class BombermanGame extends GeneralScene {
 
         // Tao root container
         root.getChildren().add(canvas);
-        root.setBackground(new Background(new BackgroundFill(Color.YELLOWGREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+        root.setStyle("-fx-background-image: url(bgmenu1.jpg); " +
+                      "-fx-backgroun-size: cover");
 
         // Tao scene
         this.setRoot(root);
@@ -75,6 +80,7 @@ public class BombermanGame extends GeneralScene {
             @Override
             public void handle(long l) {
                 if (Game_Pause == true) {
+                    gc.drawImage(new Image("/menu_background.png"), 355, 40);
                     return;
                 }
                 if (Game_Running == false) {
@@ -82,7 +88,7 @@ public class BombermanGame extends GeneralScene {
                     Game.setScene(Game.End_Scene);
                     return;
                 }
-                if (enemies.size() == 0) {
+                if (isNextLevel()) {
                     mediaPlayer.stop();
                     this.stop();
                     Game.level++;
@@ -127,10 +133,12 @@ public class BombermanGame extends GeneralScene {
                 case P:
                 {
                     if(Game_Pause == true) {
-                        mediaPlayer.play();
+                        root.getChildren().remove(pause);
+                        mediaPlayer.setMute(false);
                         Game_Pause = false;
                     } else {
-                        mediaPlayer.stop();
+                        root.getChildren().add(pause);
+                        mediaPlayer.setMute(true);
                         Game_Pause = true;
                     }
                     break;
@@ -189,5 +197,10 @@ public class BombermanGame extends GeneralScene {
         sound1.setFileMedia(i);
         sound1.playMedia();
     }
+
+    private boolean isNextLevel() {
+        return (NextLevel && enemies.size() == 0);
+    }
+
 
 }

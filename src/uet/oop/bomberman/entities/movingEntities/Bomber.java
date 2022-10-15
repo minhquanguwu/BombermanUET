@@ -5,10 +5,7 @@ import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.*;
 import uet.oop.bomberman.entities.bomb.Bomb;
-import uet.oop.bomberman.entities.items.BombItem;
-import uet.oop.bomberman.entities.items.FlameItem;
-import uet.oop.bomberman.entities.items.Item;
-import uet.oop.bomberman.entities.items.SpeedItem;
+import uet.oop.bomberman.entities.items.*;
 import uet.oop.bomberman.entities.movingEntities.enemy.Enemies;
 import uet.oop.bomberman.graphics.Sprite;
 
@@ -51,6 +48,10 @@ public class Bomber extends Ally {
                     }
                     if (check instanceof BombItem) {
                         MaxBomb++;
+                    }
+                    if (check instanceof PortalIem) {
+                        if(BombermanGame.enemies.size() != 0)  continue;
+                        BombermanGame.NextLevel = true;
                     }
                     BombermanGame.playSoundEffect(4);
                     check.Remove();

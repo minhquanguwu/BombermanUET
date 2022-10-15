@@ -48,7 +48,8 @@ public class WelcomeScene extends GeneralScene {
         // Tao scene
         root.setPadding(new Insets(41, 355, 40, 356));
         root.getChildren().add(menu);
-        root.setBackground(new Background(new BackgroundFill(Color.YELLOWGREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+        root.setStyle("-fx-background-image: url(bgmenu1.jpg); " +
+                      "-fx-backgroun-size: cover");
         this.setRoot(root);
 
     }

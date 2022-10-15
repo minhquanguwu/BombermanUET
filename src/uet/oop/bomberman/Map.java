@@ -3,6 +3,7 @@ package uet.oop.bomberman;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.items.BombItem;
 import uet.oop.bomberman.entities.items.FlameItem;
+import uet.oop.bomberman.entities.items.PortalIem;
 import uet.oop.bomberman.entities.items.SpeedItem;
 import uet.oop.bomberman.entities.movingEntities.enemy.*;
 import uet.oop.bomberman.entities.staticEntities.Brick;
@@ -127,6 +128,15 @@ public class Map {
                         Entity object = new Grass(i, j, Sprite.grass.getFxImage());
                         staticObject.add(object);
                         object  = new BombItem(i, j, Sprite.powerup_bombs.getFxImage());
+                        staticObject.add(object);
+                        object  = new Brick(i, j, Sprite.brick.getFxImage(), true);
+                        staticObject.add(object);
+                        break;
+                    }
+                    case 'x': {
+                        Entity object = new Grass(i, j, Sprite.grass.getFxImage());
+                        staticObject.add(object);
+                        object  = new PortalIem(i, j, Sprite.portal.getFxImage());
                         staticObject.add(object);
                         object  = new Brick(i, j, Sprite.brick.getFxImage(), true);
                         staticObject.add(object);

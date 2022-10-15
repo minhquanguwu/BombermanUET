@@ -20,7 +20,7 @@ public class Bomb extends AnimatedEntity {
     private List<Entity> FlameRight = new ArrayList<>();
     private List<Entity> FlameCenter = new ArrayList<>();
     protected int timeToExplode = 200;
-    public static int flameSize = 5;
+    public static int flameSize = 1;
 
     public Bomb(int x, int y, Image img) {
         super(x, y, img);

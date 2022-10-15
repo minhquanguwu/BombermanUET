@@ -2,6 +2,7 @@ package uet.oop.bomberman.ui;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.Game;
 import uet.oop.bomberman.Scenes.WelcomeScene;
 
@@ -10,12 +11,12 @@ public class MenuButton extends Button {
     private static final int B_HEIGHT = 56;
 
     public MenuButton(int Status) {
-        String a1 = "/play.png";
-        String a2 = "/play3.png";
+        String a1 = "/menubuttons/play.png";
+        String a2 = "/menubuttons/play3.png";
         switch (Status) {
             case 0: {
-                a1 = "/play.png";
-                a2 = "/play3.png";
+                a1 = "/menubuttons/play.png";
+                a2 = "/menubuttons/play3.png";
                 this.setOnAction(e -> {
                     WelcomeScene.stopMusic();
                     Game.initGame();
@@ -24,19 +25,18 @@ public class MenuButton extends Button {
                 break;
             }
             case 1: {
-                a1 = "/quit1.png";
-                a2 = "/quit2.png";
+                a1 = "/menubuttons/quit1.png";
+                a2 = "/menubuttons/quit2.png";
                 this.setOnAction(e -> {
                     System.exit(0);
                 });
                 break;
             }
             case 2: {
-                a1 = "/play.png";
-                a2 = "/play3.png";
+                a1 = "/menubuttons/option1.png";
+                a2 = "/menubuttons/option2.png";
                 this.setOnAction(e -> {
-                    Game.initWelcomeScene();
-                    Game.setScene(Game.Welcome_Scene);
+
                 });
                 break;
             }
